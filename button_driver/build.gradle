@@ -1,4 +1,7 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
+def repo = new File(rootDir, "repository")
 
 android {
     compileSdkVersion 27
@@ -22,6 +25,17 @@ android {
         }
     }
 
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository url: "file://${repo.absolutePath}"
+            pom.version = '1.0.0'
+            pom.groupId = 'me.yoshio'
+            pom.artifactId = 'button-driver'
+        }
+    }
 }
 
 dependencies {
